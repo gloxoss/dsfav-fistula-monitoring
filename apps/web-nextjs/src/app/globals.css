@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #F2F3F7;
+  --color-sidebar: #F7F8FA;
+  --color-surface: #FFFFFF;
+  --color-well: #F5F6FA;
+  --color-dark: #141B34;
+  --color-hairline: #ECEEF3;
+
+  --color-primary: #2B7A6F;
+  --color-primary-tint: #E6F2EF;
+  --color-accent: #F4C752;
+  --color-accent-tint: #FDF6DF;
+  --color-periwinkle: #6F6CF2;
+  --color-periwinkle-tint: #EEEDFE;
+  --color-cyan: #3CC4E4;
+
+  --color-normal: #23A26D;
+  --color-normal-tint: #E7F6EF;
+  --color-normal-text: #146C47;
+  --color-warning: #E9A621;
+  --color-warning-tint: #FDF3DD;
+  --color-warning-text: #7A5200;
+  --color-critical: #E5484D;
+  --color-critical-tint: #FDECEC;
+  --color-critical-text: #A8272C;
+  --color-artifact: #6F6CF2;
+  --color-artifact-tint: #EEEDFE;
+  --color-artifact-text: #4B47C9;
+
+  --color-text-primary: #16192C;
+  --color-text-secondary: #5B6075;
+  --color-text-muted: #8A8FA3;
+  --color-text-label: #6B7085;
+
+  --radius-card: 28px;
+  --radius-tile: 20px;
+  --radius-control: 14px;
+}
+
+:root {
+  --bg-canvas: #F2F3F7;
+  --bg-sidebar: #F7F8FA;
+  --bg-surface: #FFFFFF;
+  --bg-well: #F5F6FA;
+  --bg-dark: #141B34;
+  --hairline: #ECEEF3;
+  --shadow-card: 0 1px 2px rgba(20, 27, 52, 0.04);
+  --radius-card: 28px;
+  --radius-tile: 20px;
+  --radius-control: 14px;
+  --radius-pill: 9999px;
+
+  --text-primary: #16192C;
+  --text-secondary: #5B6075;
+  --text-muted: #8A8FA3;
+  --text-label: #6B7085;
+
+  --primary: #2B7A6F;
+  --primary-tint: #E6F2EF;
+  --accent: #F4C752;
+  --accent-tint: #FDF6DF;
+  --periwinkle: #6F6CF2;
+  --periwinkle-tint: #EEEDFE;
+  --cyan: #3CC4E4;
+
+  --normal: #23A26D;
+  --normal-tint: #E7F6EF;
+  --normal-text: #146C47;
+  --warning: #E9A621;
+  --warning-tint: #FDF3DD;
+  --warning-text: #7A5200;
+  --critical: #E5484D;
+  --critical-tint: #FDECEC;
+  --critical-text: #A8272C;
+  --artifact: #6F6CF2;
+  --artifact-tint: #EEEDFE;
+  --artifact-text: #4B47C9;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-manrope, system-ui, -apple-system, sans-serif);
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+}

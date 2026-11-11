@@ -1,0 +1,19 @@
+{
+  "name": "dsfav",
+  "private": true,
+  "packageManager": "pnpm@11.10.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "pnpm -r --if-present build",
+    "lint": "pnpm -r --if-present lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm -r --if-present test",
+    "dev": "pnpm -r --parallel --filter @dsfav/web --filter @dsfav/api --filter @dsfav/dsp dev",
+    "e2e": "pnpm --filter ./e2e test",
+    "contract": "pnpm --filter @dsfav/shared-types gen && pnpm --filter @dsfav/shared-types lint:openapi",
+    "demo:reset": "node scripts/demo/reset-demo.mjs --seed --clear-audit",
+    "demo:up": "node scripts/demo/up.mjs"
+  }
+}

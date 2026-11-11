@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 150" role="img" aria-label="Schéma d'une fistule radio-céphalique au poignet">
+  <title>Fistule radio-céphalique : anastomose au poignet</title>
+  <!-- Arm outline: elbow on the left, forearm, then hand on the right -->
+  <path d="M30 42 C30 32 40 27 60 27 L300 40 C322 42 336 46 340 52 L468 57 C498 59 508 70 508 80 C508 92 498 100 468 102 L340 108 C336 114 322 118 300 120 L60 126 C40 126 30 121 30 111 Z"
+        fill="#F5F6FA" stroke="#D5DAE6" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Skin fold at the wrist -->
+  <path d="M342 56 C348 70 348 90 342 106" fill="none" stroke="#D5DAE6" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Radial artery (red) along the forearm -->
+  <path d="M338 90 C250 92 150 95 56 97" fill="none" stroke="#E5484D" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+  <!-- Arterialised cephalic vein (blue), thicker after the anastomosis -->
+  <path d="M330 84 C306 66 262 62 210 60 C150 58 96 54 50 52" fill="none" stroke="#2F9FC4" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+  <path d="M330 84 C306 66 262 62 210 60 C150 58 96 54 50 52" fill="none" stroke="#BFE7F3" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 9" opacity="0.9"/>
+  <!-- Thrill zone around the venous outflow -->
+  <ellipse cx="270" cy="66" rx="52" ry="20" fill="#F4C752" opacity="0.28"/>
+  <!-- Anastomosis -->
+  <circle cx="332" cy="87" r="11" fill="#FDF6DF" stroke="#F4C752" stroke-width="3"/>
+  <circle cx="332" cy="87" r="4" fill="#B27A00"/>
+  <!-- Sensor position -->
+  <circle cx="268" cy="62" r="8" fill="#FFFFFF" stroke="#2B7A6F" stroke-width="3"/>
+  <circle cx="268" cy="62" r="2.5" fill="#2B7A6F"/>
+</svg>

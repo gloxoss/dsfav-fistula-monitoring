@@ -1,0 +1,271 @@
+// Canonical Prisma Schema for DSFAV
+// Source: the canonical specification, section 6
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  NURSE
+  NEPHROLOGIST
+  INTERN
+  ADMIN
+}
+
+enum FistulaType {
+  RADIO_CEPHALIC
+  BRACHIO_CEPHALIC
+  BRACHIO_BASILIC
+}
+
+enum AlertStatus {
+  NORMAL
+  TO_CONFIRM
+  UNUSUAL_EVOLUTION
+  REJECTED_QUALITY
+  BASELINE_BUILDING
+}
+
+enum RejectReason {
+  ARTIFACT
+  PRESSURE
+  NONE
+}
+
+enum PerceivedThrill {
+  CONTINUOUS_SOFT
+  SYSTOLIC_ROUGH
+  WEAK_DAMPENED
+  HYPERPULSATILE
+  ABSENT
+}
+
+enum MeasurementSource {
+  PATIENT
+  BENCH
+}
+
+enum MeasurementState {
+  INIT
+  UPLOADED
+  ANALYSED
+  ABANDONED
+}
+
+enum SyncState {
+  SYNCED
+  SYNCING
+  QUEUED_OFFLINE
+  FAILED
+}
+
+enum ConfigStatus {
+  DRAFT
+  IN_REVIEW
+  ACTIVE
+  ARCHIVED
+}
+
+model User {
+  id                     String            @id @default(uuid())
+  email                  String            @unique
+  passwordHash           String
+  isActive               Boolean           @default(true)
+  role                   UserRole          @default(NURSE)
+  measurements           Measurement[]
+  benchSessions          BenchSession[]
+  clinicalNotes          ClinicalNote[]
+  followUpIntents        FollowUpIntent[]
+  authoredConfigs        ConfigVersion[]   @relation("ConfigAuthor")
+  reviewedConfigs        ConfigVersion[]   @relation("ConfigReviewer")
+  lockedBaselineVersions BaselineVersion[] @relation("BaselineLockedBy")
+  auditEvents            AuditEvent[]
+  createdAt              DateTime          @default(now())
+}
+
+model PatientPseudo {
+  id               String            @id @default(uuid())
+  idPseudo         String            @unique
+  fistulaType      FistulaType       @default(RADIO_CEPHALIC)
+  armSide          String            @default("LEFT")
+  baselineVector   Json?
+  baselineLocked   Boolean           @default(false)
+  measurements     Measurement[]
+  baselineVersions BaselineVersion[]
+  clinicalNotes    ClinicalNote[]
+  followUpIntents  FollowUpIntent[]
+  createdAt        DateTime          @default(now())
+
+  @@index([idPseudo])
+}
+
+model Device {
+  id                   String          @id @default(uuid())
+  serialNumber         String          @unique
+  macAddress           String          @unique
+  deviceTokenHash      String?
+  calibrationOffsetRms Float           @default(0.0)
+  calibrationGain      Float           @default(1.0)
+  lastBatteryPct       Int             @default(100)
+  lastSeenAt           DateTime        @default(now())
+  lastSyncAt           DateTime?
+  measurements         Measurement[]
+  syncQueueItems       SyncQueueItem[]
+  createdAt            DateTime        @default(now())
+}
+
+model BaselineVersion {
+  id         String        @id @default(uuid())
+  patientId  String
+  patient    PatientPseudo @relation(fields: [patientId], references: [id])
+  rmsMean    Float
+  rmsStd     Float
+  ratioMean  Float
+  ratioStd   Float
+  fpeakMean  Float
+  fpeakStd   Float
+  lockedAt   DateTime      @default(now())
+  lockedById String?
+  lockedBy   User?         @relation("BaselineLockedBy", fields: [lockedById], references: [id])
+  archivedAt DateTime?
+  reason     String?
+  active     Boolean       @default(true)
+  createdAt  DateTime      @default(now())
+
+  @@index([patientId, active])
+}
+
+model ConfigVersion {
+  id           String        @id @default(uuid())
+  version      Int           @unique
+  status       ConfigStatus  @default(DRAFT)
+  values       Json
+  authorId     String
+  author       User          @relation("ConfigAuthor", fields: [authorId], references: [id])
+  reviewerId   String?
+  reviewer     User?         @relation("ConfigReviewer", fields: [reviewerId], references: [id])
+  reason       String?
+  measurements Measurement[]
+  publishedAt  DateTime?
+  createdAt    DateTime      @default(now())
+}
+
+model Measurement {
+  id                     String            @id @default(uuid())
+  source                 MeasurementSource @default(PATIENT)
+  patientId              String?
+  patient                PatientPseudo?    @relation(fields: [patientId], references: [id])
+  deviceId               String
+  device                 Device            @relation(fields: [deviceId], references: [id])
+  operatorId             String
+  operator               User              @relation(fields: [operatorId], references: [id])
+  state                  MeasurementState  @default(INIT)
+  status                 AlertStatus?
+  rejectReason           RejectReason      @default(NONE)
+  captureDurationSec     Float
+  cleanDurationSec       Float
+  deviceGain             Float             @default(1.0)
+  configVersionId        String?
+  configVersion          ConfigVersion?    @relation(fields: [configVersionId], references: [id])
+  idempotencyKey         String?           @unique
+  raw                    Bytes?
+  avgPressureKpa         Float
+  pressureCompliant      Boolean           @default(true)
+  artifactRatioPct       Float
+  rmsValue               Float?
+  peakAmplitude          Float?
+  dominantFreqHz         Float?
+  highLowEnergyRatio     Float?
+  baselineDeviationScore Float?
+  aiOpinion              Json?
+  rawSignalUri           String?
+  spectrogramJson        Json?
+  clinicalNotes          ClinicalNote[]
+  followUpIntents        FollowUpIntent[]
+  benchSession           BenchSession?
+  recordedAt             DateTime          @default(now())
+  createdAt              DateTime          @default(now())
+
+  @@index([patientId, recordedAt(sort: Desc)])
+  @@index([deviceId, recordedAt(sort: Desc)])
+}
+
+model ClinicalNote {
+  id            String        @id @default(uuid())
+  patientId     String
+  patient       PatientPseudo @relation(fields: [patientId], references: [id])
+  measurementId String?
+  measurement   Measurement?  @relation(fields: [measurementId], references: [id])
+  authorId      String
+  author        User          @relation(fields: [authorId], references: [id])
+  text          String
+  createdAt     DateTime      @default(now())
+
+  @@index([patientId, createdAt(sort: Desc)])
+}
+
+model FollowUpIntent {
+  id            String        @id @default(uuid())
+  patientId     String
+  patient       PatientPseudo @relation(fields: [patientId], references: [id])
+  measurementId String
+  measurement   Measurement   @relation(fields: [measurementId], references: [id])
+  authorId      String
+  author        User          @relation(fields: [authorId], references: [id])
+  reason        String?
+  createdAt     DateTime      @default(now())
+
+  @@index([patientId, createdAt(sort: Desc)])
+}
+
+model AuditEvent {
+  id       String   @id @default(uuid())
+  actorId  String
+  actor    User     @relation(fields: [actorId], references: [id])
+  action   String
+  entity   String
+  entityId String?
+  before   Json?
+  after    Json?
+  at       DateTime @default(now())
+
+  @@index([entity, at(sort: Desc)])
+}
+
+model SyncQueueItem {
+  id             String    @id @default(uuid())
+  deviceId       String
+  device         Device    @relation(fields: [deviceId], references: [id])
+  idempotencyKey String    @unique
+  state          SyncState @default(QUEUED_OFFLINE)
+  attempts       Int       @default(0)
+  payload        Json?
+  lastError      String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([deviceId, state])
+}
+
+model BenchSession {
+  id                   String           @id @default(uuid())
+  internId             String
+  intern               User             @relation(fields: [internId], references: [id])
+  measurementId        String?          @unique
+  measurement          Measurement?     @relation(fields: [measurementId], references: [id])
+  pumpFlowMlMin        Float
+  clampStenosisPct     Int
+  perceivedThrill      PerceivedThrill?
+  perceivedIntensity   Int?
+  expectedProfile      String?
+  concordanceScore     Float?
+  concordanceBreakdown Json?
+  internNotes          String?
+  palpationLockedAt    DateTime?
+  createdAt            DateTime         @default(now())
+}

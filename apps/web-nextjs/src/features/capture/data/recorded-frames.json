@@ -1,0 +1,1759 @@
+[
+  {
+    "timestampSec": 0,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 0.1,
+    "thrillValue": -0.1813,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.81,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 0.2,
+    "thrillValue": -0.1251,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.82,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 0.3,
+    "thrillValue": 0.1156,
+    "motionValue": 0.019,
+    "pressureKpa": 4.84,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 0.4,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.85,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 0.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.86,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 0.6,
+    "thrillValue": -0.0687,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.87,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 0.7,
+    "thrillValue": -0.0482,
+    "motionValue": 0.019,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 0.8,
+    "thrillValue": 0.0731,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 0.9,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.89,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1.1,
+    "thrillValue": -0.1961,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1.2,
+    "thrillValue": -0.0988,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1.3,
+    "thrillValue": 0.0681,
+    "motionValue": 0.011,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1.4,
+    "thrillValue": 0.074,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1.6,
+    "thrillValue": -0.1025,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.89,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1.7,
+    "thrillValue": -0.0938,
+    "motionValue": 0.011,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1.8,
+    "thrillValue": 0.1187,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 1.9,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.87,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.86,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2.1,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.85,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2.2,
+    "thrillValue": -0.0513,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.84,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2.3,
+    "thrillValue": 0.0418,
+    "motionValue": 0.019,
+    "pressureKpa": 4.82,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2.4,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.81,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2.6,
+    "thrillValue": -0.1813,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2.7,
+    "thrillValue": -0.1251,
+    "motionValue": 0.019,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2.8,
+    "thrillValue": 0.1156,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 2.9,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3.1,
+    "thrillValue": -0.0687,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3.2,
+    "thrillValue": -0.0482,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3.3,
+    "thrillValue": 0.0731,
+    "motionValue": 0.011,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3.4,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3.6,
+    "thrillValue": -0.1961,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3.7,
+    "thrillValue": -0.0988,
+    "motionValue": 0.011,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3.8,
+    "thrillValue": 0.0681,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 3.9,
+    "thrillValue": 0.074,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4.1,
+    "thrillValue": -0.1025,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4.2,
+    "thrillValue": -0.0938,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4.3,
+    "thrillValue": 0.1187,
+    "motionValue": 0.019,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4.4,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4.6,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4.7,
+    "thrillValue": -0.0513,
+    "motionValue": 0.019,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4.8,
+    "thrillValue": 0.0418,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 4.9,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5.1,
+    "thrillValue": -0.1813,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.81,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5.2,
+    "thrillValue": -0.1251,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.82,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5.3,
+    "thrillValue": 0.1156,
+    "motionValue": 0.011,
+    "pressureKpa": 4.84,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5.4,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.85,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.86,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5.6,
+    "thrillValue": -0.0687,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.87,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5.7,
+    "thrillValue": -0.0482,
+    "motionValue": 0.011,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5.8,
+    "thrillValue": 0.0731,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 5.9,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.89,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6.1,
+    "thrillValue": -0.1961,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6.2,
+    "thrillValue": -0.0988,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6.3,
+    "thrillValue": 0.0681,
+    "motionValue": 0.019,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6.4,
+    "thrillValue": 0.074,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6.6,
+    "thrillValue": -0.1025,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.89,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6.7,
+    "thrillValue": -0.0938,
+    "motionValue": 0.019,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6.8,
+    "thrillValue": 0.1187,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 6.9,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.87,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.86,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7.1,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.85,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7.2,
+    "thrillValue": -0.0513,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.84,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7.3,
+    "thrillValue": 0.0418,
+    "motionValue": 0.011,
+    "pressureKpa": 4.82,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7.4,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.81,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7.6,
+    "thrillValue": -0.1813,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7.7,
+    "thrillValue": -0.1251,
+    "motionValue": 0.011,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7.8,
+    "thrillValue": 0.1156,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 7.9,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8.1,
+    "thrillValue": -0.0687,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8.2,
+    "thrillValue": -0.0482,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8.3,
+    "thrillValue": 0.0731,
+    "motionValue": 0.019,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8.4,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8.6,
+    "thrillValue": -0.1961,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8.7,
+    "thrillValue": -0.0988,
+    "motionValue": 0.019,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8.8,
+    "thrillValue": 0.0681,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 8.9,
+    "thrillValue": 0.074,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9.1,
+    "thrillValue": -0.1025,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9.2,
+    "thrillValue": -0.0938,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9.3,
+    "thrillValue": 0.1187,
+    "motionValue": 0.011,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9.4,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9.6,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9.7,
+    "thrillValue": -0.0513,
+    "motionValue": 0.011,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9.8,
+    "thrillValue": 0.0418,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 9.9,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 10,
+    "thrillValue": 0,
+    "motionValue": 0.095,
+    "pressureKpa": 4.8,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 10.1,
+    "thrillValue": -0.1813,
+    "motionValue": 0.1068,
+    "pressureKpa": 4.81,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 10.2,
+    "thrillValue": -0.1251,
+    "motionValue": 0.076,
+    "pressureKpa": 4.82,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 10.3,
+    "thrillValue": 0.1156,
+    "motionValue": 0.114,
+    "pressureKpa": 4.84,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 10.4,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0832,
+    "pressureKpa": 4.85,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 10.5,
+    "thrillValue": 0,
+    "motionValue": 0.095,
+    "pressureKpa": 4.86,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 10.6,
+    "thrillValue": -0.0687,
+    "motionValue": 0.1068,
+    "pressureKpa": 4.87,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 10.7,
+    "thrillValue": -0.0482,
+    "motionValue": 0.076,
+    "pressureKpa": 4.88,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 10.8,
+    "thrillValue": 0.0731,
+    "motionValue": 0.114,
+    "pressureKpa": 4.88,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 10.9,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0832,
+    "pressureKpa": 4.89,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11,
+    "thrillValue": 0,
+    "motionValue": 0.095,
+    "pressureKpa": 4.9,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11.1,
+    "thrillValue": -0.1961,
+    "motionValue": 0.1068,
+    "pressureKpa": 4.9,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11.2,
+    "thrillValue": -0.0988,
+    "motionValue": 0.076,
+    "pressureKpa": 4.9,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11.3,
+    "thrillValue": 0.0681,
+    "motionValue": 0.114,
+    "pressureKpa": 4.9,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11.4,
+    "thrillValue": 0.074,
+    "motionValue": 0.0832,
+    "pressureKpa": 4.9,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11.5,
+    "thrillValue": 0,
+    "motionValue": 0.095,
+    "pressureKpa": 4.9,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11.6,
+    "thrillValue": -0.1025,
+    "motionValue": 0.1068,
+    "pressureKpa": 4.89,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11.7,
+    "thrillValue": -0.0938,
+    "motionValue": 0.076,
+    "pressureKpa": 4.88,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11.8,
+    "thrillValue": 0.1187,
+    "motionValue": 0.114,
+    "pressureKpa": 4.88,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 11.9,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0832,
+    "pressureKpa": 4.87,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 12,
+    "thrillValue": 0,
+    "motionValue": 0.095,
+    "pressureKpa": 4.86,
+    "isArtifact": true
+  },
+  {
+    "timestampSec": 12.1,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.85,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 12.2,
+    "thrillValue": -0.0513,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.84,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 12.3,
+    "thrillValue": 0.0418,
+    "motionValue": 0.019,
+    "pressureKpa": 4.82,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 12.4,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.81,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 12.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 12.6,
+    "thrillValue": -0.1813,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 12.7,
+    "thrillValue": -0.1251,
+    "motionValue": 0.019,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 12.8,
+    "thrillValue": 0.1156,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 12.9,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13.1,
+    "thrillValue": -0.0687,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13.2,
+    "thrillValue": -0.0482,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13.3,
+    "thrillValue": 0.0731,
+    "motionValue": 0.011,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13.4,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13.6,
+    "thrillValue": -0.1961,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13.7,
+    "thrillValue": -0.0988,
+    "motionValue": 0.011,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13.8,
+    "thrillValue": 0.0681,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 13.9,
+    "thrillValue": 0.074,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14.1,
+    "thrillValue": -0.1025,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14.2,
+    "thrillValue": -0.0938,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14.3,
+    "thrillValue": 0.1187,
+    "motionValue": 0.019,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14.4,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14.6,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14.7,
+    "thrillValue": -0.0513,
+    "motionValue": 0.019,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14.8,
+    "thrillValue": 0.0418,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 14.9,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15.1,
+    "thrillValue": -0.1813,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.81,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15.2,
+    "thrillValue": -0.1251,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.82,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15.3,
+    "thrillValue": 0.1156,
+    "motionValue": 0.011,
+    "pressureKpa": 4.84,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15.4,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.85,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.86,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15.6,
+    "thrillValue": -0.0687,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.87,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15.7,
+    "thrillValue": -0.0482,
+    "motionValue": 0.011,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15.8,
+    "thrillValue": 0.0731,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 15.9,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.89,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16.1,
+    "thrillValue": -0.1961,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16.2,
+    "thrillValue": -0.0988,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16.3,
+    "thrillValue": 0.0681,
+    "motionValue": 0.019,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16.4,
+    "thrillValue": 0.074,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16.6,
+    "thrillValue": -0.1025,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.89,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16.7,
+    "thrillValue": -0.0938,
+    "motionValue": 0.019,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16.8,
+    "thrillValue": 0.1187,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 16.9,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.87,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.86,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17.1,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.85,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17.2,
+    "thrillValue": -0.0513,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.84,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17.3,
+    "thrillValue": 0.0418,
+    "motionValue": 0.011,
+    "pressureKpa": 4.82,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17.4,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.81,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17.6,
+    "thrillValue": -0.1813,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17.7,
+    "thrillValue": -0.1251,
+    "motionValue": 0.011,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17.8,
+    "thrillValue": 0.1156,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 17.9,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18.1,
+    "thrillValue": -0.0687,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18.2,
+    "thrillValue": -0.0482,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18.3,
+    "thrillValue": 0.0731,
+    "motionValue": 0.019,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18.4,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18.6,
+    "thrillValue": -0.1961,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18.7,
+    "thrillValue": -0.0988,
+    "motionValue": 0.019,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18.8,
+    "thrillValue": 0.0681,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 18.9,
+    "thrillValue": 0.074,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19.1,
+    "thrillValue": -0.1025,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19.2,
+    "thrillValue": -0.0938,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19.3,
+    "thrillValue": 0.1187,
+    "motionValue": 0.011,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19.4,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19.6,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19.7,
+    "thrillValue": -0.0513,
+    "motionValue": 0.011,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19.8,
+    "thrillValue": 0.0418,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 19.9,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20.1,
+    "thrillValue": -0.1813,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.81,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20.2,
+    "thrillValue": -0.1251,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.82,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20.3,
+    "thrillValue": 0.1156,
+    "motionValue": 0.019,
+    "pressureKpa": 4.84,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20.4,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.85,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.86,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20.6,
+    "thrillValue": -0.0687,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.87,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20.7,
+    "thrillValue": -0.0482,
+    "motionValue": 0.019,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20.8,
+    "thrillValue": 0.0731,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 20.9,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.89,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21.1,
+    "thrillValue": -0.1961,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21.2,
+    "thrillValue": -0.0988,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21.3,
+    "thrillValue": 0.0681,
+    "motionValue": 0.011,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21.4,
+    "thrillValue": 0.074,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.9,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21.6,
+    "thrillValue": -0.1025,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.89,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21.7,
+    "thrillValue": -0.0938,
+    "motionValue": 0.011,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21.8,
+    "thrillValue": 0.1187,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.88,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 21.9,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.87,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.86,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22.1,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.85,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22.2,
+    "thrillValue": -0.0513,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.84,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22.3,
+    "thrillValue": 0.0418,
+    "motionValue": 0.019,
+    "pressureKpa": 4.82,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22.4,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.81,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22.6,
+    "thrillValue": -0.1813,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22.7,
+    "thrillValue": -0.1251,
+    "motionValue": 0.019,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22.8,
+    "thrillValue": 0.1156,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 22.9,
+    "thrillValue": 0.1435,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23.1,
+    "thrillValue": -0.0687,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23.2,
+    "thrillValue": -0.0482,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23.3,
+    "thrillValue": 0.0731,
+    "motionValue": 0.011,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23.4,
+    "thrillValue": 0.1676,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23.5,
+    "thrillValue": 0,
+    "motionValue": 0.01,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23.6,
+    "thrillValue": -0.1961,
+    "motionValue": 0.0102,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23.7,
+    "thrillValue": -0.0988,
+    "motionValue": 0.011,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23.8,
+    "thrillValue": 0.0681,
+    "motionValue": 0.0121,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 23.9,
+    "thrillValue": 0.074,
+    "motionValue": 0.0135,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.7,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24.1,
+    "thrillValue": -0.1025,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.71,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24.2,
+    "thrillValue": -0.0938,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24.3,
+    "thrillValue": 0.1187,
+    "motionValue": 0.019,
+    "pressureKpa": 4.72,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24.4,
+    "thrillValue": 0.2014,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.73,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24.5,
+    "thrillValue": 0,
+    "motionValue": 0.02,
+    "pressureKpa": 4.74,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24.6,
+    "thrillValue": -0.1266,
+    "motionValue": 0.0198,
+    "pressureKpa": 4.75,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24.7,
+    "thrillValue": -0.0513,
+    "motionValue": 0.019,
+    "pressureKpa": 4.76,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24.8,
+    "thrillValue": 0.0418,
+    "motionValue": 0.0179,
+    "pressureKpa": 4.78,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 24.9,
+    "thrillValue": 0.0888,
+    "motionValue": 0.0165,
+    "pressureKpa": 4.79,
+    "isArtifact": false
+  },
+  {
+    "timestampSec": 25,
+    "thrillValue": 0,
+    "motionValue": 0.015,
+    "pressureKpa": 4.8,
+    "isArtifact": false
+  }
+]

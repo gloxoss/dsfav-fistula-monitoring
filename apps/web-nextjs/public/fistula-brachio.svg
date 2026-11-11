@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 150" role="img" aria-label="Schéma d'une fistule brachiale au pli du coude">
+  <title>Fistule brachiale : anastomose au pli du coude</title>
+  <!-- Arm outline: shoulder side on the left, elbow in the middle, hand on the right -->
+  <path d="M14 38 C14 30 24 26 44 26 L200 34 C226 36 240 40 260 42 L318 44 L468 57 C498 59 508 70 508 80 C508 92 498 100 468 102 L318 110 L260 114 C240 116 226 120 200 122 L44 128 C24 128 14 124 14 114 Z"
+        fill="#F5F6FA" stroke="#D5DAE6" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Elbow crease -->
+  <path d="M206 38 C214 62 214 92 206 118" fill="none" stroke="#D5DAE6" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Brachial artery (red) running down the arm -->
+  <path d="M22 96 C80 96 150 94 208 90 C250 92 300 96 340 96" fill="none" stroke="#E5484D" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+  <!-- Arterialised vein (blue) from the elbow crease toward the shoulder -->
+  <path d="M212 86 C190 66 150 58 100 56 C70 55 44 53 24 52" fill="none" stroke="#2F9FC4" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+  <path d="M212 86 C190 66 150 58 100 56 C70 55 44 53 24 52" fill="none" stroke="#BFE7F3" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 9" opacity="0.9"/>
+  <!-- Thrill zone around the venous outflow -->
+  <ellipse cx="150" cy="66" rx="56" ry="20" fill="#F4C752" opacity="0.28"/>
+  <!-- Anastomosis -->
+  <circle cx="212" cy="88" r="11" fill="#FDF6DF" stroke="#F4C752" stroke-width="3"/>
+  <circle cx="212" cy="88" r="4" fill="#B27A00"/>
+  <!-- Sensor position -->
+  <circle cx="148" cy="62" r="8" fill="#FFFFFF" stroke="#2B7A6F" stroke-width="3"/>
+  <circle cx="148" cy="62" r="2.5" fill="#2B7A6F"/>
+</svg>

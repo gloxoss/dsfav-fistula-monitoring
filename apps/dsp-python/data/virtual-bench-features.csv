@@ -1,0 +1,9 @@
+clamp_stenosis_pct,pump_flow_ml_min,perceived_thrill,perceived_intensity,measured_intensity_level,rms,dominant_hz,ratio,spectral_width,intern_notes
+0,450,CONTINUOUS_SOFT,2,3,0.145005,68.36,0.319935,90.8515,"Simulation banc phantom clamp 0% : thrill souple et continu"
+0,450,CONTINUOUS_SOFT,2,3,0.144999,68.36,0.320027,90.8582,"Simulation banc phantom clamp 0% : thrill souple et continu"
+30,450,CONTINUOUS_SOFT,2,3,0.139460,62.50,0.480100,101.6362,"Simulation banc phantom clamp 30% : thrill souple perceptible"
+30,450,CONTINUOUS_SOFT,2,3,0.139467,62.50,0.479974,101.6315,"Simulation banc phantom clamp 30% : thrill souple perceptible"
+50,450,SYSTOLIC_ROUGH,3,2,0.130717,57.62,0.639877,108.3909,"Simulation banc phantom clamp 50% : thrill rugueux méso-systolique"
+50,450,SYSTOLIC_ROUGH,3,2,0.130715,57.62,0.640030,108.3936,"Simulation banc phantom clamp 50% : thrill rugueux méso-systolique"
+75,450,HYPERPULSATILE,4,2,0.119136,52.73,0.800078,112.9496,"Simulation banc phantom clamp 75% : thrill hyperpulsatile franc"
+75,450,HYPERPULSATILE,4,2,0.119141,52.73,0.800213,112.9506,"Simulation banc phantom clamp 75% : thrill hyperpulsatile franc"

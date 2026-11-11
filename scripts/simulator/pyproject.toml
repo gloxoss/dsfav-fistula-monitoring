@@ -1,0 +1,43 @@
+[project]
+name = "dsfav-sim"
+version = "0.1.0"
+description = "DSFAV virtual device simulator: binary protocol, telemetry scenarios, CLI"
+requires-python = ">=3.12"
+dependencies = [
+    "dsfav-dsp",
+    "httpx>=0.28.1",
+    "numpy>=2.5.4",
+    "websockets>=15.1.1",
+]
+
+[tool.uv.sources]
+dsfav-dsp = { path = "../../apps/dsp-python", editable = true }
+
+[project.scripts]
+dsfav-sim = "dsfav_sim.cli:run_cli"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.4",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.18,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--junitxml=../../reports/junit/sim.xml"
+
+[tool.mypy]
+strict = true            # external stubs handled per-module in overrides
+
+[[tool.mypy.overrides]]
+module = ["httpx", "httpx.*", "websockets", "websockets.*", "dsfav_dsp", "dsfav_dsp.*"]
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 100
+src = ["dsfav_sim", "tests"]

@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "likec4.likec4-vscode",
+    "bierner.markdown-mermaid",
+    "Prisma.prisma",
+    "vitest.explorer",
+    "ms-playwright.playwright",
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "42Crunch.vscode-openapi",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "ms-azuretools.vscode-docker",
+    "hediet.vscode-drawio"
+  ]
+}

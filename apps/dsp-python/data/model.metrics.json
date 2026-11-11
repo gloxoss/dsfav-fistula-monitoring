@@ -1,0 +1,48 @@
+{
+  "class_names": [
+    "0",
+    "30",
+    "50",
+    "75"
+  ],
+  "confusion_matrix": [
+    [
+      2,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      2,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      2,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      2
+    ]
+  ],
+  "metrics": {
+    "accuracy": 1.0,
+    "cross_entropy": 0.043041158067743626
+  },
+  "modelVersion": "dsfav-logreg-v1",
+  "numSamples": 8,
+  "overallAccuracy": 1.0,
+  "per_class_accuracy": {
+    "0": 1.0,
+    "30": 1.0,
+    "50": 1.0,
+    "75": 1.0
+  },
+  "trainingDataLabel": "Données synthétiques, non cliniques"
+}

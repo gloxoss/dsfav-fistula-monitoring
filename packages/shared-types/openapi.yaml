@@ -1,0 +1,1806 @@
+openapi: 3.1.0
+info:
+  title: DSFAV Clinical Vascular Monitoring API
+  version: 1.0.0
+  description: >
+    Multi-platform REST & WebSocket API for the ENSAM Casablanca DSFAV system.
+    Supports ESP32-C3 hardware ingestion, Next.js Web UI, and Mobile clients.
+    Aide à la décision uniquement : la décision d’un examen écho-Doppler reste médicale.
+  license:
+    name: Proprietary
+    identifier: MIT
+servers:
+  - url: http://localhost:3001
+    description: DSFAV NestJS Local API Server
+security:
+  - bearerAuth: []
+
+paths:
+  # ---------------------------------------------------------------------------
+  # Auth (canonical spec §7: POST /auth/login, GET /me; refresh & logout in v1.1)
+  # ---------------------------------------------------------------------------
+  /auth/login:
+    post:
+      summary: Authenticate operator with email and password
+      operationId: login
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "infirmier@dsfav.local"
+                password:
+                  type: string
+                  format: password
+                  example: "demo1234"
+      responses:
+        "200":
+          description: Successfully authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /me:
+    get:
+      summary: Get currently authenticated user profile
+      operationId: getMe
+      responses:
+        "200":
+          description: Current user profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  # ---------------------------------------------------------------------------
+  # Capture & Measurements (canonical spec §7)
+  # ---------------------------------------------------------------------------
+  /measurements:
+    post:
+      summary: Initialize a new measurement session (two-step capture flow)
+      operationId: createMeasurement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [deviceId]
+              properties:
+                idPseudo:
+                  type: [string, "null"]
+                  example: "PT-CAS-8841"
+                deviceId:
+                  type: string
+                  format: uuid
+                source:
+                  $ref: "#/components/schemas/MeasurementSource"
+                  default: PATIENT
+      responses:
+        "201":
+          description: Measurement session initialized
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [measurementId, state]
+                properties:
+                  measurementId:
+                    type: string
+                    format: uuid
+                  state:
+                    type: string
+                    example: "INIT"
+        "400":
+          description: Invalid device or patient reference
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /measurements/{id}/raw:
+    put:
+      summary: Upload raw binary signal stream (application/octet-stream int16 interleaved)
+      operationId: uploadMeasurementRaw
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        "200":
+          description: Signal processed successfully; DSP result returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeasurementResultDto"
+        "400":
+          description: Malformed binary stream or invalid header
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "422":
+          description: Quality gate rejected (excessive motion or non-compliant pressure)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeasurementResultDto"
+
+  /measurements/{id}/abandon:
+    post:
+      summary: Abandon an initiated measurement session
+      operationId: abandonMeasurement
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reason]
+              properties:
+                reason:
+                  type: string
+                  example: "Operator aborted repositioning"
+      responses:
+        "200":
+          description: Session marked as abandoned
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [measurementId, status]
+                properties:
+                  measurementId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    example: "ABANDONED"
+        "404":
+          description: Measurement not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /measurements/{id}:
+    get:
+      summary: Full measurement inspector payload
+      operationId: getMeasurementById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Detailed measurement record with signals and features
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeasurementDetailDto"
+        "404":
+          description: Measurement not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  # ---------------------------------------------------------------------------
+  # Triage Queue (canonical spec §7)
+  # ---------------------------------------------------------------------------
+  /queue:
+    get:
+      summary: Today's triage queue for dialysis chair sessions
+      operationId: getQueue
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/Status"
+        - name: deviceId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of triage items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QueueItem"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  # ---------------------------------------------------------------------------
+  # Patients (canonical spec §7)
+  # ---------------------------------------------------------------------------
+  /patients:
+    get:
+      summary: List all registered patient pseudonyms with baseline state
+      operationId: getPatients
+      responses:
+        "200":
+          description: List of patient records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PatientSummary"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Register a new patient pseudonym record after confirmation (UC5)
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [idPseudo, fistulaType, armSide]
+              properties:
+                idPseudo:
+                  type: string
+                  example: "PT-CAS-9277"
+                fistulaType:
+                  $ref: "#/components/schemas/FistulaType"
+                armSide:
+                  type: string
+                  example: "LEFT"
+      responses:
+        "201":
+          description: Patient created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientDetail"
+        "409":
+          description: Patient idPseudo already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /patients/{idPseudo}/history:
+    get:
+      summary: Get longitudinal FAV history & baseline comparison (UC8)
+      operationId: getPatientHistory
+      parameters:
+        - name: idPseudo
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "PT-CAS-8841"
+      responses:
+        "200":
+          description: Chronological measurements and personal baseline vector
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientHistoryResponse"
+        "404":
+          description: Patient not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /patients/{idPseudo}/notes:
+    get:
+      summary: List clinical notes for a patient (NEPHROLOGIST only)
+      operationId: getPatientNotes
+      parameters:
+        - name: idPseudo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Clinical notes, newest first
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClinicalNote"
+        "403":
+          description: Forbidden (requires NEPHROLOGIST role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Add an append-only clinical note for a patient (NEPHROLOGIST only)
+      operationId: addPatientNote
+      parameters:
+        - name: idPseudo
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text:
+                  type: string
+                  example: "Thrill stable au tiers moyen, pas de souffle suspect."
+                measurementId:
+                  type: [string, "null"]
+                  format: uuid
+      responses:
+        "201":
+          description: Clinical note recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClinicalNote"
+        "403":
+          description: Forbidden (requires NEPHROLOGIST role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /patients/{idPseudo}/follow-up-intents:
+    get:
+      summary: List follow-up intents for a patient (NEPHROLOGIST only)
+      operationId: getPatientFollowUps
+      parameters:
+        - name: idPseudo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Follow-up intents, newest first
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FollowUpSummary"
+        "403":
+          description: Forbidden (requires NEPHROLOGIST role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Record intent to refer for echo-Doppler (NEPHROLOGIST only)
+      operationId: recordFollowUpIntent
+      parameters:
+        - name: idPseudo
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [measurementId]
+              properties:
+                measurementId:
+                  type: string
+                  format: uuid
+                reason:
+                  type: [string, "null"]
+                  example: "Suspicion de sténose anastomotique après deux alertes consécutives"
+      responses:
+        "201":
+          description: Follow-up intent recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FollowUpIntent"
+        "403":
+          description: Forbidden (requires NEPHROLOGIST role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /patients/{idPseudo}/rebaseline:
+    post:
+      summary: Reset patient baseline to BUILDING state with audit trail (NEPHROLOGIST only)
+      operationId: rebaselinePatient
+      parameters:
+        - name: idPseudo
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reason]
+              properties:
+                reason:
+                  type: string
+                  example: "Angioplastie transluminale réalisée le 05/11/2026"
+      responses:
+        "200":
+          description: Baseline archived and patient returned to BUILDING state
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [idPseudo, status, reason, rebaselinedAt]
+                properties:
+                  idPseudo:
+                    type: string
+                  status:
+                    type: string
+                    example: "BASELINE_BUILDING"
+                  reason:
+                    type: string
+                  rebaselinedAt:
+                    type: string
+                    format: date-time
+        "403":
+          description: Forbidden (requires NEPHROLOGIST role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /patients/{idPseudo}/baseline-versions:
+    get:
+      summary: List a patient's baseline versions and archive reasons (NEPHROLOGIST only)
+      operationId: getPatientBaselineVersions
+      parameters:
+        - name: idPseudo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Baseline versions, newest first
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BaselineVersionSummary"
+        "403":
+          description: Forbidden (requires NEPHROLOGIST role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  # ---------------------------------------------------------------------------
+  # Device Fleet & Sync (canonical spec §7)
+  # ---------------------------------------------------------------------------
+  /devices:
+    get:
+      summary: List all fleet devices and status
+      operationId: getDevices
+      responses:
+        "200":
+          description: List of fleet units
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DeviceSummary"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /devices/{id}:
+    get:
+      summary: Get device details and calibration info
+      operationId: getDeviceById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Device record
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceSummary"
+        "404":
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /devices/{id}/calibration:
+    post:
+      summary: Update device calibration gain ratio measured on the bench
+      operationId: updateDeviceCalibration
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [calibrationGain, reason]
+              properties:
+                calibrationGain:
+                  type: number
+                  example: 1.039
+                reason:
+                  type: string
+                  example: "Étalonnage annuel banc 400 mL/min"
+      responses:
+        "200":
+          description: Calibration updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceSummary"
+        "403":
+          description: Forbidden (requires ADMIN role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /devices/sync:
+    post:
+      summary: Synchronize offline measurements from a device (idempotent)
+      operationId: syncDevices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceSyncRequest"
+      responses:
+        "200":
+          description: Offline sync results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceSyncResponse"
+        "400":
+          description: Malformed sync batch
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /sync-queue/{id}/retry:
+    post:
+      summary: Retry a failed offline sync item (NURSE only)
+      operationId: retryFailedSyncItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Retried sync item, idempotent by its idempotency key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceSyncItemResult"
+        "403":
+          description: Forbidden (requires NURSE role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Sync item not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  # ---------------------------------------------------------------------------
+  # Training Bench (canonical spec §7, §9, §11.2)
+  # ---------------------------------------------------------------------------
+  /bench/sessions:
+    get:
+      summary: List training bench sessions
+      operationId: getBenchSessions
+      responses:
+        "200":
+          description: List of bench training sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BenchSessionSummary"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Initialize an intern training bench session
+      operationId: createBenchSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [pumpFlowMlMin, clampStenosisPct]
+              properties:
+                pumpFlowMlMin:
+                  type: number
+                  example: 450
+                clampStenosisPct:
+                  type: integer
+                  enum: [0, 30, 50, 75]
+      responses:
+        "201":
+          description: Bench session initialized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BenchSessionSummary"
+        "400":
+          description: Invalid bench parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /bench/sessions/{id}/palpation:
+    post:
+      summary: Lock intern subjective palpation assessment before objective reveal
+      operationId: submitBenchPalpation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [perceivedThrill, perceivedIntensity]
+              properties:
+                perceivedThrill:
+                  $ref: "#/components/schemas/PerceivedThrill"
+                perceivedIntensity:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                  example: 3
+                internNotes:
+                  type: [string, "null"]
+                  example: "Frémissement perçu modéré avec renforcement systolique"
+      responses:
+        "200":
+          description: Palpation assessment locked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BenchSessionSummary"
+        "400":
+          description: Session not found or palpation already locked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /bench/sessions/{id}/capture:
+    post:
+      summary: Link objective measurement and reveal concordance score (palpation must be locked first)
+      operationId: completeBenchCapture
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [measurementId]
+              properties:
+                measurementId:
+                  type: string
+                  format: uuid
+      responses:
+        "200":
+          description: Concordance evaluation revealed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BenchSessionResult"
+        "400":
+          description: Palpation not yet submitted or measurement invalid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  # ---------------------------------------------------------------------------
+  # Clinical Configuration (canonical spec §7)
+  # ---------------------------------------------------------------------------
+  /config/active:
+    get:
+      summary: Get currently active clinical configuration and thresholds
+      operationId: getActiveConfig
+      responses:
+        "200":
+          description: Active configuration version
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfigVersionResponse"
+        "404":
+          description: No active configuration found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /audit:
+    get:
+      summary: List audit events (NEPHROLOGIST and ADMIN only)
+      operationId: getAuditEvents
+      parameters:
+        - name: action
+          in: query
+          schema:
+            type: string
+        - name: entity
+          in: query
+          schema:
+            type: string
+        - name: entityId
+          in: query
+          schema:
+            type: string
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+            minimum: 1
+            maximum: 200
+        - name: cursor
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Filtered audit events page, newest first
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditEventPage"
+        "403":
+          description: Forbidden (requires NEPHROLOGIST or ADMIN role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /users:
+    get:
+      summary: List user roles and account status (ADMIN only)
+      operationId: getUsers
+      responses:
+        "200":
+          description: User role and status only; identifiers and contact data are omitted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdminUserSummary"
+        "403":
+          description: Forbidden (requires ADMIN role)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+# =============================================================================
+# Components & Schemas
+# =============================================================================
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # -------------------------------------------------------------------------
+    # Canonical Enums (§5)
+    # -------------------------------------------------------------------------
+    UserRole:
+      type: string
+      enum:
+        - NURSE
+        - NEPHROLOGIST
+        - INTERN
+        - ADMIN
+
+    FistulaType:
+      type: string
+      enum:
+        - RADIO_CEPHALIC
+        - BRACHIO_CEPHALIC
+        - BRACHIO_BASILIC
+
+    Status:
+      type: string
+      enum:
+        - NORMAL
+        - TO_CONFIRM
+        - UNUSUAL_EVOLUTION
+        - REJECTED_QUALITY
+        - BASELINE_BUILDING
+
+    RejectReason:
+      type: string
+      enum:
+        - ARTIFACT
+        - PRESSURE
+        - NONE
+
+    PerceivedThrill:
+      type: string
+      enum:
+        - CONTINUOUS_SOFT
+        - SYSTOLIC_ROUGH
+        - WEAK_DAMPENED
+        - HYPERPULSATILE
+        - ABSENT
+
+    MeasurementSource:
+      type: string
+      enum:
+        - PATIENT
+        - BENCH
+
+    SyncState:
+      type: string
+      enum:
+        - SYNCED
+        - SYNCING
+        - QUEUED_OFFLINE
+        - FAILED
+
+    ConfigStatus:
+      type: string
+      enum:
+        - DRAFT
+        - IN_REVIEW
+        - ACTIVE
+        - ARCHIVED
+
+    AuditEventSummary:
+      type: object
+      required: [id, action, entity, entityId, actorRole, at, after]
+      properties:
+        id:
+          type: string
+        action:
+          type: string
+        entity:
+          type: string
+        entityId:
+          type: [string, "null"]
+        actorRole:
+          $ref: "#/components/schemas/UserRole"
+        at:
+          type: string
+          format: date-time
+        after:
+          type: [object, "null"]
+          additionalProperties: true
+          description: Sanitized event changes. DEVICE_CALIBRATED includes calibrationGain and reason.
+
+    AuditEventPage:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditEventSummary"
+        nextCursor:
+          type: [string, "null"]
+          description: Cursor for the next page, or null if no further entries
+
+    AdminUserSummary:
+      type: object
+      required: [role, status]
+      properties:
+        role:
+          $ref: "#/components/schemas/UserRole"
+        status:
+          type: string
+          enum: [ACTIVE, DISABLED]
+
+    # -------------------------------------------------------------------------
+    # Generic Error
+    # -------------------------------------------------------------------------
+    Error:
+      type: object
+      required:
+        - code
+        - message_fr
+        - retryable
+      properties:
+        code:
+          type: string
+          example: "UNAUTHORIZED"
+        message_fr:
+          type: string
+          example: "Authentification requise"
+        retryable:
+          type: boolean
+          example: false
+        field:
+          type: [string, "null"]
+
+    # -------------------------------------------------------------------------
+    # Auth & User DTOs
+    # -------------------------------------------------------------------------
+    AuthResponse:
+      type: object
+      required:
+        - token
+        - user
+      properties:
+        token:
+          type: string
+        user:
+          $ref: "#/components/schemas/UserResponse"
+
+    UserResponse:
+      type: object
+      required:
+        - id
+        - email
+        - role
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        role:
+          $ref: "#/components/schemas/UserRole"
+        createdAt:
+          type: string
+          format: date-time
+
+    # -------------------------------------------------------------------------
+    # Measurement DTOs
+    # -------------------------------------------------------------------------
+    QualityGateResult:
+      type: object
+      required:
+        - passed
+        - clean_duration_sec
+        - artifact_ratio_pct
+        - avg_pressure_kpa
+        - reject_reason
+        - message
+      properties:
+        passed:
+          type: boolean
+        clean_duration_sec:
+          type: number
+          example: 23.5
+        artifact_ratio_pct:
+          type: number
+          example: 4.2
+        avg_pressure_kpa:
+          type: number
+          example: 5.4
+        reject_reason:
+          $ref: "#/components/schemas/RejectReason"
+        message:
+          type: string
+          example: "Qualité conforme"
+
+    MeasurementFeatures:
+      type: object
+      required:
+        - rms
+        - peak_to_peak
+        - dominant_freq_hz
+        - stenosis_ratio
+      properties:
+        rms:
+          type: number
+          example: 0.145
+        peak_to_peak:
+          type: number
+          example: 0.620
+        dominant_freq_hz:
+          type: number
+          example: 68.0
+        stenosis_ratio:
+          type: number
+          example: 0.32
+
+    BaselineComparison:
+      type: object
+      required:
+        - deviation_score
+        - is_unusual_evolution
+        - status
+        - alert_label
+        - clinical_explanation
+        - disclaimer
+      properties:
+        deviation_score:
+          type: number
+          example: 1.2
+        is_unusual_evolution:
+          type: boolean
+          example: false
+        status:
+          $ref: "#/components/schemas/Status"
+        alert_label:
+          type: string
+          example: "Mesure correcte"
+        clinical_explanation:
+          type: string
+          example: "Signal conforme aux mesures de référence"
+        disclaimer:
+          type: string
+          example: "Aide à la décision uniquement : la décision d’un examen écho-Doppler reste médicale."
+
+    MeasurementResultDto:
+      type: object
+      required:
+        - measurementId
+        - status
+        - rejectReason
+        - quality_gate
+        - features
+        - baseline_comparison
+        - disclaimer
+      properties:
+        measurementId:
+          type: string
+          format: uuid
+        recordedAt:
+          type: string
+          format: date-time
+          description: "Horodatage de la mesure"
+        status:
+          $ref: "#/components/schemas/Status"
+        rejectReason:
+          $ref: "#/components/schemas/RejectReason"
+        quality_gate:
+          $ref: "#/components/schemas/QualityGateResult"
+        features:
+          $ref: "#/components/schemas/MeasurementFeatures"
+        stft_preview:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+        baseline_comparison:
+          $ref: "#/components/schemas/BaselineComparison"
+        aiOpinion:
+          $ref: "#/components/schemas/AiOpinion"
+        disclaimer:
+          type: string
+          example: "Aide à la décision uniquement : la décision d’un examen écho-Doppler reste médicale."
+
+    AiOpinion:
+      type: object
+      required: [level, evidence, modelVersion, dataLabel]
+      properties:
+        level:
+          type: string
+        evidence:
+          type: object
+          required: [features, baselineValues, topContributors]
+          properties:
+            features:
+              type: array
+              items:
+                $ref: "#/components/schemas/AiEvidenceValue"
+            baselineValues:
+              type: array
+              items:
+                $ref: "#/components/schemas/AiEvidenceValue"
+            topContributors:
+              type: array
+              items:
+                type: string
+        modelVersion:
+          type: string
+        dataLabel:
+          type: string
+
+    AiEvidenceValue:
+      type: object
+      required: [name, value]
+      properties:
+        name:
+          type: string
+        value:
+          type: number
+
+    MeasurementDetailDto:
+      type: object
+      required:
+        - measurementId
+        - deviceId
+        - operatorId
+        - recordedAt
+        - durationSec
+        - cleanDurationSec
+        - avgPressureKpa
+        - status
+        - rejectReason
+        - quality_gate
+        - features
+        - baseline_comparison
+        - disclaimer
+      properties:
+        measurementId:
+          type: string
+          format: uuid
+        patientId:
+          type: [string, "null"]
+          format: uuid
+        idPseudo:
+          type: [string, "null"]
+          example: "PT-CAS-8841"
+        deviceId:
+          type: string
+          format: uuid
+        operatorId:
+          type: string
+          format: uuid
+        recordedAt:
+          type: string
+          format: date-time
+        durationSec:
+          type: number
+          example: 25.0
+        cleanDurationSec:
+          type: number
+          example: 24.0
+        avgPressureKpa:
+          type: number
+          example: 5.6
+        status:
+          $ref: "#/components/schemas/Status"
+        rejectReason:
+          $ref: "#/components/schemas/RejectReason"
+        quality_gate:
+          $ref: "#/components/schemas/QualityGateResult"
+        features:
+          $ref: "#/components/schemas/MeasurementFeatures"
+        stft_preview:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+        baseline_comparison:
+          $ref: "#/components/schemas/BaselineComparison"
+        disclaimer:
+          type: string
+          example: "Aide à la décision uniquement : la décision d’un examen écho-Doppler reste médicale."
+
+    QueueItem:
+      type: object
+      required:
+        - measurementId
+        - deviceId
+        - operatorId
+        - status
+        - recordedAt
+        - disclaimer
+      properties:
+        measurementId:
+          type: string
+          format: uuid
+        idPseudo:
+          type: [string, "null"]
+          example: "PT-CAS-8841"
+        deviceId:
+          type: string
+          format: uuid
+        operatorId:
+          type: string
+          format: uuid
+        status:
+          $ref: "#/components/schemas/Status"
+        recordedAt:
+          type: string
+          format: date-time
+        disclaimer:
+          type: string
+          example: "Aide à la décision uniquement : la décision d’un examen écho-Doppler reste médicale."
+
+    # -------------------------------------------------------------------------
+    # Patient DTOs
+    # -------------------------------------------------------------------------
+    PatientSummary:
+      type: object
+      required:
+        - id
+        - idPseudo
+        - fistulaType
+        - armSide
+        - baselineLocked
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        idPseudo:
+          type: string
+          example: "PT-CAS-8841"
+        fistulaType:
+          $ref: "#/components/schemas/FistulaType"
+        armSide:
+          type: string
+          example: "LEFT"
+        baselineLocked:
+          type: boolean
+        lastStatus:
+          oneOf:
+            - $ref: "#/components/schemas/Status"
+            - type: "null"
+        lastMeasurementAt:
+          type: [string, "null"]
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+
+    PatientDetail:
+      type: object
+      required:
+        - id
+        - idPseudo
+        - fistulaType
+        - armSide
+        - baselineLocked
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        idPseudo:
+          type: string
+          example: "PT-CAS-8841"
+        fistulaType:
+          $ref: "#/components/schemas/FistulaType"
+        armSide:
+          type: string
+          example: "LEFT"
+        baselineLocked:
+          type: boolean
+        baselineVector:
+          type: [object, "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    PatientHistoryResponse:
+      type: object
+      required:
+        - idPseudo
+        - fistulaType
+        - armSide
+        - baselineLocked
+        - measurements
+        - disclaimer
+      properties:
+        idPseudo:
+          type: string
+          example: "PT-CAS-8841"
+        fistulaType:
+          $ref: "#/components/schemas/FistulaType"
+        armSide:
+          type: string
+          example: "LEFT"
+        baselineLocked:
+          type: boolean
+        baselineVector:
+          type: [object, "null"]
+        measurements:
+          type: array
+          items:
+            $ref: "#/components/schemas/MeasurementResultDto"
+        disclaimer:
+          type: string
+          example: "Aide à la décision uniquement : la décision d’un examen écho-Doppler reste médicale."
+
+    ClinicalNote:
+      type: object
+      required:
+        - id
+        - patientId
+        - authorId
+        - text
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        patientId:
+          type: string
+          format: uuid
+        measurementId:
+          type: [string, "null"]
+          format: uuid
+        authorId:
+          type: string
+          format: uuid
+        text:
+          type: string
+          example: "Thrill stable au tiers moyen"
+        createdAt:
+          type: string
+          format: date-time
+
+    FollowUpIntent:
+      type: object
+      required:
+        - id
+        - patientId
+        - measurementId
+        - authorId
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        patientId:
+          type: string
+          format: uuid
+        measurementId:
+          type: string
+          format: uuid
+        authorId:
+          type: string
+          format: uuid
+        reason:
+          type: [string, "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    FollowUpSummary:
+      type: object
+      required: [idPseudo, measurementId, createdAt]
+      properties:
+        idPseudo:
+          type: string
+        measurementId:
+          type: string
+          format: uuid
+        reason:
+          type: [string, "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    BaselineVersionSummary:
+      type: object
+      required: [idPseudo, lockedAt, active]
+      properties:
+        idPseudo:
+          type: string
+        lockedAt:
+          type: string
+          format: date-time
+        archivedAt:
+          type: [string, "null"]
+          format: date-time
+        reason:
+          type: [string, "null"]
+        active:
+          type: boolean
+
+    # -------------------------------------------------------------------------
+    # Device Fleet & Sync DTOs
+    # -------------------------------------------------------------------------
+    DeviceSummary:
+      type: object
+      required:
+        - id
+        - serialNumber
+        - macAddress
+        - calibrationGain
+        - lastBatteryPct
+        - lastSeenAt
+        - lastSyncAt
+        - failedCount
+        - continuity
+      properties:
+        id:
+          type: string
+          format: uuid
+        serialNumber:
+          type: string
+          example: "DSFAV-UNIT-01"
+        macAddress:
+          type: string
+          example: "AA:BB:CC:DD:EE:01"
+        calibrationGain:
+          type: number
+          example: 1.0
+        lastBatteryPct:
+          type: integer
+          example: 95
+        lastSeenAt:
+          type: string
+          format: date-time
+        lastSyncAt:
+          type: [string, "null"]
+          format: date-time
+        failedCount:
+          type: integer
+          minimum: 0
+        continuity:
+          type: object
+          required: [uniquePatients, crossDevicePatients]
+          properties:
+            uniquePatients:
+              type: integer
+              minimum: 0
+              description: Number of distinct pseudonymous patients measured with this device.
+            crossDevicePatients:
+              type: integer
+              minimum: 0
+              description: Number of those patients measured with more than one device.
+
+    DeviceSyncRequest:
+      type: object
+      required:
+        - deviceSerial
+        - batteryPct
+        - items
+      properties:
+        deviceSerial:
+          type: string
+          example: "DSFAV-UNIT-01"
+        batteryPct:
+          type: integer
+          example: 85
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - idempotencyKey
+            properties:
+              idempotencyKey:
+                type: string
+              idPseudo:
+                type: [string, "null"]
+              recordedAt:
+                type: string
+                format: date-time
+              avgPressureKpa:
+                type: number
+              captureDurationSec:
+                type: number
+              cleanDurationSec:
+                type: number
+              status:
+                $ref: "#/components/schemas/Status"
+              rejectReason:
+                $ref: "#/components/schemas/RejectReason"
+
+    DeviceSyncResponse:
+      type: object
+      required:
+        - syncedCount
+        - failedCount
+        - results
+      properties:
+        syncedCount:
+          type: integer
+        failedCount:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/DeviceSyncItemResult"
+
+    DeviceSyncItemResult:
+      type: object
+      required: [idempotencyKey, state, error]
+      properties:
+        idempotencyKey:
+          type: string
+        state:
+          $ref: "#/components/schemas/SyncState"
+        error:
+          type: [string, "null"]
+        measurement:
+          $ref: "#/components/schemas/MeasurementResultDto"
+
+    # -------------------------------------------------------------------------
+    # Training Bench DTOs
+    # -------------------------------------------------------------------------
+    BenchSessionSummary:
+      type: object
+      required:
+        - id
+        - internId
+        - pumpFlowMlMin
+        - clampStenosisPct
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        internId:
+          type: string
+          format: uuid
+        measurementId:
+          type: [string, "null"]
+          format: uuid
+        pumpFlowMlMin:
+          type: number
+          example: 450
+        clampStenosisPct:
+          type: integer
+          enum: [0, 30, 50, 75]
+          example: 30
+        perceivedThrill:
+          oneOf:
+            - $ref: "#/components/schemas/PerceivedThrill"
+            - type: "null"
+        perceivedIntensity:
+          type: [integer, "null"]
+          example: 3
+        concordanceScore:
+          type: [number, "null"]
+          example: 85.0
+        createdAt:
+          type: string
+          format: date-time
+
+    BenchSessionResult:
+      type: object
+      required:
+        - sessionId
+        - internId
+        - measurementId
+        - pumpFlowMlMin
+        - clampStenosisPct
+        - perceivedThrill
+        - perceivedIntensity
+        - concordanceScore
+        - expectedProfile
+        - concordanceBreakdown
+        - disclaimer
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+        internId:
+          type: string
+          format: uuid
+        measurementId:
+          type: string
+          format: uuid
+        pumpFlowMlMin:
+          type: number
+          example: 450
+        clampStenosisPct:
+          type: integer
+          example: 30
+        perceivedThrill:
+          $ref: "#/components/schemas/PerceivedThrill"
+        perceivedIntensity:
+          type: integer
+          example: 3
+        concordanceScore:
+          type: number
+          example: 85.0
+        expectedProfile:
+          type: string
+          example: "SYSTOLIC_ROUGH"
+        concordanceBreakdown:
+          type: object
+          properties:
+            sensationScorePct:
+              type: number
+              example: 60.0
+            intensityScorePct:
+              type: number
+              example: 25.0
+            notesScorePct:
+              type: number
+              example: 15.0
+        internNotes:
+          type: [string, "null"]
+          example: "Observation d'une turbulence accentuée en systole"
+        disclaimer:
+          type: string
+          example: "Simulation sur banc, pas de donnée patient"
+
+    # -------------------------------------------------------------------------
+    # Config Version DTOs
+    # -------------------------------------------------------------------------
+    ConfigVersionResponse:
+      type: object
+      required:
+        - id
+        - version
+        - status
+        - values
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        version:
+          type: integer
+          example: 7
+        status:
+          $ref: "#/components/schemas/ConfigStatus"
+        values:
+          type: object
+          required:
+            - thresholdSigma
+            - consecutiveAlerts
+            - pressureMinKpa
+            - pressureLowKpa
+            - pressureHighKpa
+            - pressureMaxKpa
+            - motionThresholdG
+            - cleanTimeMinSec
+            - stdFloorPct
+          properties:
+            thresholdSigma:
+              type: number
+              example: 3.4
+            consecutiveAlerts:
+              type: integer
+              example: 2
+            pressureMinKpa:
+              type: number
+              example: 2.5
+            pressureLowKpa:
+              type: number
+              example: 3.0
+            pressureHighKpa:
+              type: number
+              example: 8.5
+            pressureMaxKpa:
+              type: number
+              example: 9.0
+            motionThresholdG:
+              type: number
+              example: 0.08
+            cleanTimeMinSec:
+              type: number
+              example: 12.0
+            stdFloorPct:
+              type: number
+              example: 5.0
+        reason:
+          type: [string, "null"]
+          example: "Canonical calibration baseline values"
+        publishedAt:
+          type: [string, "null"]
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time

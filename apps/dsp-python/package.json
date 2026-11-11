@@ -1,0 +1,11 @@
+{
+  "name": "@dsfav/dsp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "uv run uvicorn dsfav_dsp.api:app --reload --port 8010",
+    "test": "uv run pytest",
+    "lint": "uv run ruff check .",
+    "typecheck": "uv run mypy src"
+  }
+}

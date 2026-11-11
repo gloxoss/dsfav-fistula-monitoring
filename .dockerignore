@@ -1,0 +1,13 @@
+**/node_modules
+**/.venv
+**/.next
+**/dist
+**/coverage
+**/reports
+**/__pycache__
+pre-dev
+artifacts
+.git
+.env
+.env.*
+!.env.example

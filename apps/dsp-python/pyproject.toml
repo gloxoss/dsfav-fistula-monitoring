@@ -1,0 +1,38 @@
+[project]
+name = "dsfav-dsp"
+version = "0.1.0"
+description = "DSFAV signal-processing service (pure DSP library and FastAPI wrapper)"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.162.1",
+    "numpy>=2.5.4",
+    "pydantic>=2.14.3",
+    "scipy>=1.18.1",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.18,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "hypothesis>=6.170.15",
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.4",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--junitxml=../../reports/junit/dsp.xml"
+markers = ["perf: performance budget tests"]
+
+[tool.mypy]
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["scipy.*"]
+ignore_missing_imports = true

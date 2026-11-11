@@ -1,0 +1,18 @@
+{
+  "name": "@dsfav/shared-types",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "gen": "openapi-typescript ./openapi.yaml -o src/generated/api.ts",
+    "lint:openapi": "redocly lint ./openapi.yaml",
+    "build": "pnpm run gen && tsc -p tsconfig.json",
+    "typecheck": "pnpm run gen && tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^2.76.0",
+    "openapi-typescript": "^7.13.0",
+    "typescript": "^5.9.3"
+  }
+}

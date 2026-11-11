@@ -1,0 +1,16 @@
+# Dev only: publishes the ports DSFAV v1 needs. Not used in production.
+# Host ports avoid the other local stacks on this machine (5432, 6379, 9000, 8000 are taken).
+# Redis and MinIO are not used in v1 (docs/DECISIONS.md D-007), so they are not published.
+services:
+  postgres:
+    ports:
+      - "5433:5432"
+  api:
+    ports:
+      - "3001:3001"
+  dsp:
+    ports:
+      - "8010:8000"
+  web:
+    ports:
+      - "3000:3000"

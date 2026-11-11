@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>DSFAV, présentation académique</title>
+<meta name="viewport" content="width=1920, height=1080">
+<link rel="stylesheet" href="./runtime/fonts.css">
+<style>
+/* Tokens copied from apps/web-nextjs/src/app/globals.css (the app's own theme).
+   ACCENT = the sensor point: the teal ring is the measuring site, and nothing else is teal. */
+:root {
+  --ground: #F2F3F7;
+  --ground-hi: #F9FAFC;
+  --ground-2: #141B34;
+  --ink: #16192C;
+  --ink-soft: #5B6075;
+  --accent: #2B7A6F;
+  --hairline: #D5DAE6;
+  --font: "Inter", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+#main { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden;
+  background: radial-gradient(ellipse 70% 60% at 50% 42%, var(--ground-hi), var(--ground)); color: var(--ink); font-family: var(--font); font-weight: 500; }
+/* No visibility rule here: the runtime shows an element by clearing its inline visibility, so a CSS rule would pin it hidden. */
+.scene { position: absolute; inset: 0; }
+.cam { position: absolute; inset: 0; }
+.cap { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 60px; line-height: 76px; white-space: pre; letter-spacing: -0.01em; }
+.shot { position: absolute; border-radius: 28px; box-shadow: 0 44px 80px -44px rgba(20,27,52,.38), 0 0 0 1px rgba(20,27,52,.05); }
+.ring { position: absolute; width: 76px; height: 76px; margin: -38px 0 0 -38px; left: 0; top: 0; }
+#s6 { background: var(--ground-2); color: #F4F5F9; }
+</style>
+</head>
+<body>
+<div id="main">
+
+  <!-- BEAT 1 · HOOK (0-149): a sensor ring lands on a drawn fistula. Buys: the viewer believes a handheld sensor measures the thrill at the fistula. -->
+  <section id="s1" class="scene">
+    <div id="cam1" class="cam">
+      <svg id="arm" viewBox="0 0 520 150" width="1560" height="450" style="position:absolute;left:180px;top:300px" role="img" aria-label="Schéma d’une fistule brachio-céphalique du bras droit">
+        <g transform="translate(520,0) scale(-1,1)">
+          <path d="M14 38 C14 30 24 26 44 26 L200 34 C226 36 240 40 260 42 L318 44 L468 57 C498 59 508 70 508 80 C508 92 498 100 468 102 L318 110 L260 114 C240 116 226 120 200 122 L44 128 C24 128 14 124 14 114 Z" fill="#FFFFFF" stroke="#D5DAE6" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M206 38 C214 62 214 92 206 118" fill="none" stroke="#D5DAE6" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M22 96 C80 96 150 94 208 90 C250 92 300 96 340 96" fill="none" stroke="#E5484D" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+          <path d="M212 86 C190 66 150 58 100 56 C70 55 44 53 24 52" fill="none" stroke="#3CC4E4" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+          <ellipse cx="150" cy="66" rx="56" ry="20" fill="#F4C752" opacity="0.28"/>
+          <circle cx="212" cy="88" r="11" fill="#FDF6DF" stroke="#F4C752" stroke-width="3"/>
+          <circle cx="212" cy="88" r="4" fill="#B27A00"/>
+        </g>
+      </svg>
+      <svg id="ring1" class="ring" viewBox="-40 -40 80 80"><circle r="30" fill="none" stroke="#2B7A6F" stroke-width="7"/><circle r="6" fill="#2B7A6F"/></svg>
+      <div id="h1" class="cap" style="top:800px">Un capteur posé sur la fistule.</div>
+      <div id="h2" class="cap" style="top:800px">Vingt-cinq secondes de mesure.</div>
+    </div>
+  </section>
+
+  <!-- BEAT 2 · PROOF 1 (150-389): the ring becomes the pressure marker. Buys: the measure only starts when the pressure is right. -->
+  <section id="s2" class="scene">
+    <div id="cam2" class="cam">
+      <img id="pressImg" class="shot" src="./assets/capture-pressure.png" width="1141" height="859" style="left:390px;top:50px" alt="Carte Appui sur la FAV, 4,8 kPa, zone recommandée">
+      <svg id="ring2" class="ring" viewBox="-40 -40 80 80"><circle r="30" fill="none" stroke="#2B7A6F" stroke-width="7"/><circle r="6" fill="#2B7A6F"/></svg>
+    </div>
+    <div id="c2a" class="cap" style="top:960px">Appui entre 3,0 et 8,5 kPa.</div>
+    <div id="c2b" class="cap" style="top:960px">Hors plage, le départ est bloqué.</div>
+  </section>
+
+  <!-- BEAT 3 · PROOF 2 (390-659): the real live trace; the violet band is the motion that gets excluded. Buys: noisy seconds do not count. -->
+  <section id="s3" class="scene">
+    <div id="cam3" class="cam">
+      <img id="sigImg" class="shot" src="./assets/capture-signal.png" width="1100" height="802" style="left:410px;top:60px;clip-path:inset(0 var(--r,100%) 0 0 round 28px)" alt="Signal du thrill en direct avec une période de mouvement écartée">
+    </div>
+    <div id="c3a" class="cap" style="top:910px">25 secondes de signal.</div>
+    <div id="c3b" class="cap" style="top:910px">Les secondes agitées sont écartées.</div>
+    <div id="c3c" class="cap" style="top:910px">Moins de 12 s propres : mesure refaite.</div>
+  </section>
+
+  <!-- BEAT 4 · PROOF 3 (660-939): the interactive map reads each zone against the patient's reference. Buys: the screen is a real tool, not a picture. -->
+  <section id="s4" class="scene">
+    <div id="cam4" class="cam">
+      <img id="mapA" class="shot" src="./assets/map-anastomosis.png" width="1100" height="820" style="left:410px;top:60px" alt="Carte de la fistule, anastomose">
+      <img id="mapV" class="shot" src="./assets/map-vein.png" width="1100" height="820" style="left:410px;top:60px" alt="Carte de la fistule, veine de drainage">
+      <img id="mapS" class="shot" src="./assets/map-sensor.png" width="1100" height="820" style="left:410px;top:60px" alt="Carte de la fistule, site du capteur">
+      <div id="chipV" style="position:absolute;left:705px;top:518px;width:150px;height:60px"></div>
+      <div id="chipS" style="position:absolute;left:953px;top:518px;width:150px;height:60px"></div>
+      <svg id="cur" width="44" height="44" viewBox="0 0 24 24" style="position:absolute;left:0;top:0"><path d="M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.7 L11 13.3 L18 13 Z" fill="#16192C" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </div>
+    <div id="c4" class="cap" style="top:920px">Chaque zone se lit contre la référence du patient.</div>
+  </section>
+
+  <!-- BEAT 5 · TURN (940-1119): no alert until the reference exists. Buys: the tool stays quiet when it cannot compare yet. -->
+  <section id="s5" class="scene">
+    <div id="cam5" class="cam">
+      <img id="strip" class="shot" src="./assets/queue-tiles.png" width="1700" height="211" style="left:110px;top:380px;border-radius:20px" alt="Tuiles de la file du jour : Référence en cours, pas d’alerte avant 3 mesures valides">
+    </div>
+    <div id="c5a" class="cap" style="top:800px">Aucune alerte avant trois mesures valides.</div>
+    <div id="c5b" class="cap" style="top:800px">Données simulées. Prototype universitaire.</div>
+  </section>
+
+  <!-- BEAT 6 · CLOSE (1120-1223): the canonical disclaimer, verbatim (apps/web-nextjs/src/libs/clinical/disclaimer.ts). -->
+  <section id="s6" class="scene">
+    <svg id="ring3" class="ring" viewBox="-40 -40 80 80"><circle r="30" fill="none" stroke="#6FC4B6" stroke-width="7"/><circle r="6" fill="#6FC4B6"/></svg>
+    <div id="d1" class="cap" style="top:470px;font-size:58px;color:#F4F5F9">Aide à la décision uniquement :</div>
+    <div id="d2" class="cap" style="top:550px;font-size:58px;color:#F4F5F9">la décision d’un examen écho-Doppler reste médicale.</div>
+  </section>
+
+</div>
+
+<script src="./runtime/vendor/gsap.min.js"></script>
+<script src="./runtime/motion.js"></script>
+<script>
+/* Every visible thing is a pure function of t (seek contract). Authored only through Motion calls. */
+const M = Motion.film({ fps: 30, duration: 40.8, width: 1920, height: 1080, clock: 'smooth' });
+const ACCENT = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+const place = (sel, x, y) => { M.kf(sel, 'x', [[0, x]]); M.kf(sel, 'y', [[0, y]]); };
+
+/* ---- BEAT 1 ---- */
+M.enter('#arm', { at: 0, frames: 14, ease: 'softLand', from: { x: 160, blur: 8, opacity: 1 }, smear: { axis: 'x', px: 40, frames: 3 } });
+place('#ring1', 1296, 486);
+M.enter('#ring1', { at: 26, frames: 14, ease: 'softLand', from: { scale: 3.5, opacity: 0 } });
+M.words('#h1', { at: 54, mech: 'rise', gaps: [5, 4, 6, 4, 5, 7], dist: 70, frames: 13, ease: 'softLand', accent: { color: ACCENT, frames: 24, word: [1] } });
+M.hide('#h1', 100);
+M.words('#h2', { at: 104, mech: 'rise', gaps: [5, 6, 6, 8], dist: 70, frames: 13, ease: 'softLand' });
+M.drift('#cam1', { prop: 'scale', from: 1, to: 1.045, start: 0, end: 150 });
+
+/* ---- cut: ring carries into beat 2 ---- */
+M.cut(150, { hide: ['#s1'], show: ['#s2'] });
+
+/* ---- BEAT 2 ---- */
+M.enter('#pressImg', { at: 150, frames: 12, ease: 'softLand', from: { y: 70, scale: .95, blur: 6, opacity: 1 }, smear: { axis: 'y', px: 30, frames: 3 } });
+/* crop shown at 1.25x (1141 x 859) at left 390, top 50: its gauge marker (377,345) lands at (390+471, 50+431) = (861, 481) */
+M.kf('#ring2', 'x', [[150, 1296], [164, 861, 'whip']]);
+M.kf('#ring2', 'y', [[150, 486], [164, 481, 'whip']]);
+M.words('#c2a', { at: 190, mech: 'rise', gaps: [5, 4, 6, 4, 6, 7], dist: 60, frames: 13, ease: 'softLand', accent: { color: ACCENT, frames: 24, word: [2, 4] } });
+M.hide('#c2a', 292);
+M.words('#c2b', { at: 296, mech: 'rise', gaps: [5, 5, 5, 6, 6, 8], dist: 60, frames: 13, ease: 'softLand' });
+M.camera('#cam2', [[150, { scale: 1 }], [389, { scale: 1.08 }]], { origin: '861px 481px', ease: 'cruise' });
+
+M.cut(390, { hide: ['#s2'], show: ['#s3'] });
+
+/* ---- BEAT 3 ---- */
+M.kf('#sigImg', '--r', [[390, 100], [470, 0, 'glide']], { fmt: v => v + '%' });
+M.words('#c3a', { at: 408, mech: 'rise', gaps: [6, 7, 8], dist: 60, frames: 13, ease: 'softLand' });
+M.hide('#c3a', 516);
+M.words('#c3b', { at: 520, mech: 'rise', gaps: [4, 5, 5, 6, 7], dist: 60, frames: 13, ease: 'softLand' });
+M.hide('#c3b', 596);
+M.words('#c3c', { at: 600, mech: 'rise', gaps: [4, 5, 4, 5, 6, 6], dist: 60, frames: 13, ease: 'softLand', accent: { color: ACCENT, frames: 24, word: [1, 2] } });
+M.drift('#cam3', { prop: 'scale', from: 1, to: 1.06, start: 390, end: 660 });
+
+M.cut(660, { hide: ['#s3'], show: ['#s4'] });
+
+/* ---- BEAT 4: a real interaction, chip by chip ---- */
+M.enter('#mapA', { at: 660, frames: 12, ease: 'softLand', from: { y: 60, scale: .96, blur: 6, opacity: 1 }, smear: { axis: 'y', px: 28, frames: 3 } });
+M.hide('#mapV', 0); M.hide('#mapS', 0);
+M.cut(791, { hide: ['#mapA'], show: ['#mapV'] });
+M.cut(881, { hide: ['#mapV'], show: ['#mapS'] });
+M.cursor('#cur', { keys: [[660, 1560, 820, 2.8, -24], [772, 780, 552, 1, 0], [800, 780, 552, 1, 0], [872, 1028, 552, 1, 0], [906, 1028, 552, 1, 0], [939, 1340, 760, 1, 0]], ease: 'glide' });
+M.press('#cur', '#chipV', { at: 787, cursorDepth: .8, targetDepth: .8, lag: 1, frames: 3, release: true });
+M.press('#cur', '#chipS', { at: 877, cursorDepth: .8, targetDepth: .8, lag: 1, frames: 3, release: true });
+M.words('#c4', { at: 690, mech: 'rise', gaps: [4, 4, 4, 5, 5, 5, 6, 7], dist: 60, frames: 13, ease: 'softLand', accent: { color: ACCENT, frames: 24, word: [5] } });
+M.drift('#cam4', { prop: 'scale', from: 1, to: 1.035, start: 660, end: 940 });
+
+M.cut(940, { hide: ['#s4'], show: ['#s5'] });
+
+/* ---- BEAT 5 ---- */
+M.enter('#strip', { at: 940, frames: 12, ease: 'softLand', from: { y: 60, scale: .96, blur: 6, opacity: 1 }, smear: { axis: 'y', px: 28, frames: 3 } });
+M.camera('#cam5', [[980, { scale: 1 }], [1050, { scale: 1.8 }, 'softInOut']], { origin: '1238px 486px' });
+M.words('#c5a', { at: 954, mech: 'rise', gaps: [5, 5, 5, 5, 7, 7], dist: 60, frames: 13, ease: 'softLand', accent: { color: ACCENT, frames: 24, word: [4] } });
+M.hide('#c5a', 1040);
+M.words('#c5b', { at: 1044, mech: 'rise', gaps: [6, 8, 8, 8], dist: 60, frames: 13, ease: 'softLand' });
+
+M.cut(1120, { hide: ['#s5'], show: ['#s6'] });
+
+/* ---- BEAT 6 ---- */
+place('#ring3', 960, 350);
+M.enter('#ring3', { at: 1120, frames: 14, ease: 'softLand', from: { scale: 3.5, opacity: 0 } });
+M.words('#d1', { at: 1136, mech: 'rise', gaps: [5, 4, 5, 7, 7], dist: 50, frames: 13, ease: 'softLand' });
+M.words('#d2', { at: 1160, mech: 'rise', gaps: [4, 4, 4, 5, 5, 6, 6], dist: 50, frames: 13, ease: 'softLand' });
+M.drift('#s6', { prop: 'scale', from: 1, to: 1.012, start: 1120, end: 1224 });
+
+window.__ready = Motion.loaded().then(() => {
+  if (location.search.includes('selftest')) return Motion.selfTest(M, { samples: 24 });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "e2e"
+
+allowBuilds:
+  "@prisma/client": true
+  prisma: true
+  "@prisma/engines": true
+  esbuild: true
+  "@swc/core": true
+  sharp: true
+  unrs-resolver: true
+  "@parcel/watcher": false
+  '@scarf/scarf': false
+
+onlyBuiltDependencies:
+  - "@prisma/client"
+  - prisma
+  - "@prisma/engines"
+  - esbuild
+  - "@swc/core"
+  - sharp
+  - unrs-resolver

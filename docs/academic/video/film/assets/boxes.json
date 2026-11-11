@@ -1,0 +1,26 @@
+{
+  "scale": 2.5,
+  "boxes": {
+    "capture-signal": {
+      "source": "capture-page.png",
+      "x": 276,
+      "y": 534,
+      "width": 750.65625,
+      "height": 547.5
+    },
+    "capture-quality": {
+      "source": "capture-page.png",
+      "x": 1046.65625,
+      "y": 534,
+      "width": 365.34375,
+      "height": 368.5
+    },
+    "capture-pressure": {
+      "source": "capture-page.png",
+      "x": 276,
+      "y": 235,
+      "width": 365.328125,
+      "height": 275
+    }
+  }
+}
